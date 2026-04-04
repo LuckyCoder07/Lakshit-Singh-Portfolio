@@ -1,10 +1,11 @@
 import { Project, Experience, Skill } from './types';
+import profileImg from './assets/profile.jpg';
 
 export const LAKSHIT_DATA = {
   name: 'Lakshit Singh',
   role: 'Computer Engineering Student',
   interest: 'Data Science',
-  profileImage: 'profile.jpg',
+  profileImage: profileImg,
   github: 'https://github.com/LuckyCoder07',
   linkedin: 'https://www.linkedin.com/in/lakshit-singh-2550b1360',
   email: 'lakshit.singh25@pccoepune.org',
