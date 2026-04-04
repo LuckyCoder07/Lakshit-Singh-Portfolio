@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { LAKSHIT_DATA } from '../constants';
+import DataVisualizer from './DataVisualizer';
 
 export default function Hero() {
   return (
@@ -15,17 +16,9 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.2 }}
           className="relative flex md:hidden justify-center mb-8"
         >
-          <div className="relative z-10 w-full max-w-[300px] aspect-square rounded-3xl overflow-hidden border border-white/10 glass-card p-1">
-            <img 
-              src={LAKSHIT_DATA.profileImage} 
-              alt={LAKSHIT_DATA.name}
-              className="w-full h-full object-cover rounded-2xl opacity-90 hover:opacity-100 transition-all duration-500"
-              referrerPolicy="no-referrer"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://picsum.photos/seed/developer/800/800";
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+          <div className="relative z-10 w-full max-w-[300px] aspect-square rounded-3xl overflow-hidden border border-white/10 glass-card p-4">
+            <DataVisualizer />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
           </div>
         </motion.div>
 
@@ -79,17 +72,9 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.2 }}
           className="relative hidden md:flex justify-center"
         >
-          <div className="relative z-10 w-full max-w-[450px] aspect-square rounded-3xl overflow-hidden border border-white/10 glass-card p-1">
-            <img 
-              src={LAKSHIT_DATA.profileImage} 
-              alt={LAKSHIT_DATA.name}
-              className="w-full h-full object-cover rounded-2xl opacity-90 hover:opacity-100 transition-all duration-500"
-              referrerPolicy="no-referrer"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://picsum.photos/seed/developer/800/800";
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+          <div className="relative z-10 w-full max-w-[450px] aspect-square rounded-3xl overflow-hidden border border-white/10 glass-card p-8">
+            <DataVisualizer />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
           </div>
           {/* Decorative elements */}
           <div className="absolute -top-6 right-[calc(50%-225px-24px)] w-24 h-24 border-t-2 border-r-2 border-cyan-primary/50 rounded-tr-3xl hidden lg:block" />
