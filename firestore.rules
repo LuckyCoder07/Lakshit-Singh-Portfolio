@@ -1,0 +1,72 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: chats/{chatId}/messages
+    // Fields:
+    //   - text: string (required, 1-5000 chars)
+    //   - sender: string (required, 'user' or 'ai')
+    //   - timestamp: timestamp (required)
+    //   - userId: string (required)
+    //
+    // Collection: contactSubmissions
+    // Fields:
+    //   - name: string (required, 1-100 chars)
+    //   - email: string (required, valid email)
+    //   - message: string (required, 1-2000 chars)
+    //   - timestamp: timestamp (required)
+    //   - userId: string (optional)
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    // Domain Validators
+    function isValidMessage(data) {
+      return data.text is string && data.text.size() > 0 && data.text.size() <= 5000 &&
+             data.sender in ['user', 'ai'] &&
+             data.timestamp is timestamp &&
+             data.userId is string;
+    }
+
+    function isValidContact(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             isValidEmail(data.email) &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 2000 &&
+             data.timestamp is timestamp;
+    }
+
+    // Rules
+    match /chats/{chatId} {
+      allow read, write: if isOwner(chatId);
+      
+      match /messages/{messageId} {
+        allow read: if isOwner(chatId);
+        allow create: if isOwner(chatId) && isValidMessage(request.resource.data);
+      }
+    }
+
+    match /contactSubmissions/{submissionId} {
+      allow create: if isValidContact(request.resource.data);
+      allow read: if false; // Only admin can read (via console)
+    }
+
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+  }
+}

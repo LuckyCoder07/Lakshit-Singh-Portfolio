@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cyan-primary: #00f5ff;
+  --color-cyan-secondary: #00b8d4;
+  --color-dark-bg: #0a0a0a;
+  --color-dark-card: #141414;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-white font-sans;
+  }
+  
+  ::selection {
+    @apply bg-cyan-primary/30 text-cyan-primary;
+  }
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+}
+
+.cyan-glow {
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-primary to-cyan-secondary;
+}
