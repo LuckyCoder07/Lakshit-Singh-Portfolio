@@ -11,7 +11,6 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Chatbot from './components/Chatbot';
 
 export default function App() {
   return (
@@ -26,7 +25,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      <Chatbot />
     </div>
   );
 }

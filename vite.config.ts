@@ -9,9 +9,6 @@ export default defineConfig(({mode}) => {
     // This ensures your assets (JS/CSS) load correctly on GitHub Pages
     base: '/Lakshit-Singh-Portfolio/', 
     plugins: [react(), tailwindcss()],
-    define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
