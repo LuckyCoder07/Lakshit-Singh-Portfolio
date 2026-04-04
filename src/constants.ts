@@ -1,5 +1,5 @@
 import { Project, Experience, Skill } from './types';
-import profileImg from './assets/profile.png';
+import profileImg from './assets/profile.jpg';
 
 export const LAKSHIT_DATA = {
   name: 'Lakshit Singh',
