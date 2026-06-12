@@ -1,0 +1,98 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Github, ExternalLink } from 'lucide-react';
+import './Projects.css';
+
+const Projects = () => {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fallbackProjects = [
+    {
+      title: 'VisionMorp AI',
+      description: 'An AI-powered application designed to transform and morph images using advanced machine learning models.',
+      techStack: ['Python', 'React', 'Node.js'],
+      githubLink: 'https://github.com/LuckyCoder07',
+    },
+    {
+      title: 'QuicknotesAI',
+      description: 'A smart note-taking app that automatically summarizes and organizes your notes using AI.',
+      techStack: ['React', 'Firebase', 'Tailwind CSS'],
+      githubLink: 'https://github.com/LuckyCoder07',
+    },
+    {
+      title: 'GravityFlipper Game',
+      description: 'An engaging web-based physics game where players manipulate gravity to overcome obstacles.',
+      techStack: ['React', 'Node.js', 'C++'],
+      githubLink: 'https://github.com/LuckyCoder07',
+    },
+    {
+      title: 'Vouch-digital Code Notary',
+      description: 'A secure platform for digital code signing and verification to ensure software integrity.',
+      techStack: ['Node.js', 'React', 'MongoDB'],
+      githubLink: 'https://github.com/LuckyCoder07',
+    }
+  ];
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const response = await axios.get(`${apiUrl}/api/projects`);
+        if (response.data && response.data.length > 0) {
+          setProjects(response.data);
+        } else {
+          setProjects(fallbackProjects);
+        }
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+        setProjects(fallbackProjects);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  return (
+    <section id="projects" className="projects section-padding">
+      <div className="container">
+        <h2 className="section-title">Some Things I've Built</h2>
+        {loading ? (
+          <div className="loading">Loading projects...</div>
+        ) : (
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <div key={index} className="project-card glass-panel">
+                <div className="project-content">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-desc">{project.description}</p>
+                  <ul className="project-tech">
+                    {project.techStack && project.techStack.map((tech, i) => (
+                      <li key={i}>{tech}</li>
+                    ))}
+                  </ul>
+                  <div className="project-links">
+                    {project.githubLink && (
+                      <a href={project.githubLink} target="_blank" rel="noopener noreferrer" aria-label="GitHub Link">
+                        <Github size={20} />
+                      </a>
+                    )}
+                    {project.liveLink && (
+                      <a href={project.liveLink} target="_blank" rel="noopener noreferrer" aria-label="Live Link">
+                        <ExternalLink size={20} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default Projects;

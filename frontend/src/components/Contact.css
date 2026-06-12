@@ -1,0 +1,16 @@
+.contact-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-text {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+}
+
+.contact-btn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
