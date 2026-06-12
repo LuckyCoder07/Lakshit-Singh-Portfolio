@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import './About.css';
 
 import profilePic from '../assets/profile.png';
@@ -7,9 +8,24 @@ const About = () => {
   return (
     <section id="about" className="about section-padding">
       <div className="container">
-        <h2 className="section-title">About Me</h2>
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+        >
+          About Me
+        </motion.h2>
+        
         <div className="about-content">
-          <div className="about-text fade-in-up">
+          <motion.div 
+            className="about-text"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <p>
               I'm a <strong>Computer Engineering student</strong> at Pimpri Chinchwad College of Engineering (PCCOE), Pune, with a major interest in <strong>Data Science</strong>.
             </p>
@@ -19,12 +35,19 @@ const About = () => {
             <p>
               When I'm not coding, you can find me participating in hackathons, contributing to open-source projects, or sharing my knowledge with the developer community.
             </p>
-          </div>
-          <div className="about-image-container fade-in-up" style={{ animationDelay: '0.2s' }}>
+          </motion.div>
+          
+          <motion.div 
+            className="about-image-container"
+            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.4 }}
+          >
             <div className="about-image-wrapper">
               <img src={profilePic} alt="Lakshit Singh" className="profile-img" />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

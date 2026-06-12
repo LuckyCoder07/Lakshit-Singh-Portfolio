@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import './Projects.css';
@@ -13,13 +14,13 @@ const Projects = () => {
       title: 'VisionMorp AI',
       description: 'An AI-powered application designed to transform and morph images using advanced machine learning models.',
       techStack: ['Python', 'React', 'Node.js'],
-      githubLink: 'https://github.com/LuckyCoder07',
+      githubLink: 'https://github.com/LuckyCoder07/VisonMorphAI',
     },
     {
       title: 'QuicknotesAI',
       description: 'A smart note-taking app that automatically summarizes and organizes your notes using AI.',
       techStack: ['React', 'Firebase', 'Tailwind CSS'],
-      githubLink: 'https://github.com/LuckyCoder07',
+      githubLink: 'https://github.com/LuckyCoder07/QuickNotes-AI',
     },
     {
       title: 'GravityFlipper Game',
@@ -31,7 +32,7 @@ const Projects = () => {
       title: 'Vouch-digital Code Notary',
       description: 'A secure platform for digital code signing and verification to ensure software integrity.',
       techStack: ['Node.js', 'React', 'MongoDB'],
-      githubLink: 'https://github.com/LuckyCoder07',
+      githubLink: 'https://github.com/LuckyCoder07/Vouch-Project',
     }
   ];
 
@@ -59,13 +60,30 @@ const Projects = () => {
   return (
     <section id="projects" className="projects section-padding">
       <div className="container">
-        <h2 className="section-title">Some Things I've Built</h2>
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Some Things I've Built
+        </motion.h2>
+        
         {loading ? (
           <div className="loading">Loading projects...</div>
         ) : (
           <div className="projects-grid">
             {projects.map((project, index) => (
-              <div key={index} className="project-card glass-panel">
+              <motion.div 
+                key={index} 
+                className="project-card glass-panel"
+                initial={{ opacity: 0, scale: 0.9, rotateX: -15 }}
+                whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: index * 0.15, type: "spring" }}
+                whileHover={{ y: -10, scale: 1.02 }}
+              >
                 <div className="project-content">
                   <h3 className="project-title">{project.title}</h3>
                   <p className="project-desc">{project.description}</p>
@@ -87,7 +105,7 @@ const Projects = () => {
                     )}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}

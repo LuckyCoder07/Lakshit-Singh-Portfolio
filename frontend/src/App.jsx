@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Motivation3D from './components/Motivation3D';
+import DoodleArt from './components/DoodleArt';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
@@ -13,6 +15,8 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <Motivation3D />
+        <DoodleArt />
         <About />
         <Skills />
         <Projects />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import { FaReact, FaNodeJs, FaPython, FaFire } from 'react-icons/fa';
 import { SiTailwindcss, SiCplusplus, SiC, SiMongodb } from 'react-icons/si';
 import './Skills.css';
@@ -54,16 +55,41 @@ const Skills = () => {
   const categories = ['All', ...new Set(skills.map(skill => skill.category))];
   const filteredSkills = activeCategory === 'All' ? skills : skills.filter(skill => skill.category === activeCategory);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.9 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 200 } }
+  };
+
   return (
     <section id="skills" className="skills section-padding">
       <div className="container">
-        <h2 className="section-title">Interactive Tech Stack</h2>
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          Interactive Tech Stack
+        </motion.h2>
         
         {loading ? (
           <div className="loading">Loading skills...</div>
         ) : (
           <>
-            <div className="skills-tabs fade-in-up">
+            <motion.div 
+              className="skills-tabs"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
               {categories.map(category => (
                 <button 
                   key={category} 
@@ -73,19 +99,29 @@ const Skills = () => {
                   {category}
                 </button>
               ))}
-            </div>
+            </motion.div>
 
-            <div className="skills-grid">
+            <motion.div 
+              className="skills-grid"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-50px" }}
+            >
               {filteredSkills.map((skill, index) => (
-                <div key={index} className="skill-card glass-panel tech-stack-card fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                <motion.div 
+                  key={index} 
+                  variants={itemVariants}
+                  className="skill-card glass-panel tech-stack-card"
+                >
                   <div className="skill-icon">
                     {iconMap[skill.name] || <div className="icon-placeholder" />}
                   </div>
                   <div className="skill-name">{skill.name}</div>
                   <div className="skill-category">{skill.category}</div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </>
         )}
       </div>
