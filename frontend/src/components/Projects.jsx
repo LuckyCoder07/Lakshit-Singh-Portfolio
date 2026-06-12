@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Github, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
 import './Projects.css';
 
 const Projects = () => {
@@ -76,7 +77,7 @@ const Projects = () => {
                   <div className="project-links">
                     {project.githubLink && (
                       <a href={project.githubLink} target="_blank" rel="noopener noreferrer" aria-label="GitHub Link">
-                        <Github size={20} />
+                        <FaGithub size={20} />
                       </a>
                     )}
                     {project.liveLink && (

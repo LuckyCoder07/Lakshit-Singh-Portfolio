@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import './Footer.css';
 
 const Footer = () => {
@@ -8,10 +8,10 @@ const Footer = () => {
       <div className="container footer-container">
         <div className="social-links">
           <a href="https://github.com/LuckyCoder07" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <Github size={24} />
+            <FaGithub size={24} />
           </a>
           <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <Linkedin size={24} />
+            <FaLinkedin size={24} />
           </a>
         </div>
         <p className="copyright">
