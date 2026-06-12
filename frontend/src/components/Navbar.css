@@ -35,14 +35,16 @@
 }
 
 .nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
   font-weight: 500;
-  font-size: 1rem;
+  transition: color 0.3s ease;
+  padding: 0.5rem 0;
   position: relative;
-  transition: var(--transition);
 }
 
 .nav-links a:hover {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 .nav-links a::after {
@@ -50,15 +52,23 @@
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: -4px;
+  bottom: 0;
   left: 0;
-  background-color: var(--accent);
-  transition: var(--transition);
+  background-color: var(--primary);
+  transition: width 0.3s ease;
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active-link::after {
   width: 100%;
 }
+
+.nav-links a.active-link {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+
 
 .neon-switch-container {
   background: transparent;

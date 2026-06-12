@@ -101,7 +101,7 @@ const FloatingOrbs = () => {
 };
 
 // --------------------------------------------------------
-// LIGHT MODE: Glass Data-Flow
+// LIGHT MODE: Crystal Cubes Data-Flow
 // --------------------------------------------------------
 const GlassDataFlow = () => {
   const groupRef = useRef();
@@ -131,11 +131,9 @@ const GlassDataFlow = () => {
     const positions = [];
 
     groupRef.current.children.forEach((child, i) => {
-      // Floating motion
       const baseX = nodes[i].pos.x + Math.sin(t * nodes[i].speed + nodes[i].offset) * 1.5;
       const baseY = nodes[i].pos.y + Math.cos(t * nodes[i].speed + nodes[i].offset) * 1.5;
       
-      // Mouse avoidance
       const dx = baseX - mx;
       const dy = baseY - my;
       const dist = Math.sqrt(dx*dx + dy*dy);
@@ -148,7 +146,6 @@ const GlassDataFlow = () => {
       positions.push(child.position.x, child.position.y, child.position.z);
     });
 
-    // Create lines connecting close nodes
     const linePositions = [];
     for (let i = 0; i < positions.length / 3; i++) {
       for (let j = i + 1; j < positions.length / 3; j++) {
@@ -164,16 +161,30 @@ const GlassDataFlow = () => {
 
   return (
     <>
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#0ea5e9" />
+      
       <group ref={groupRef}>
         {nodes.map((_, i) => (
           <mesh key={i}>
-            <boxGeometry args={[0.6, 0.6, 0.6]} />
-            <meshBasicMaterial color="#0969da" transparent opacity={0.15} wireframe />
+            <boxGeometry args={[0.7, 0.7, 0.7]} />
+            <meshPhysicalMaterial 
+              color="#ffffff" 
+              transmission={0.9} 
+              opacity={1} 
+              transparent 
+              roughness={0.1} 
+              ior={1.5} 
+              thickness={1} 
+              clearcoat={1}
+              clearcoatRoughness={0.1}
+            />
           </mesh>
         ))}
       </group>
       <lineSegments ref={linesRef} geometry={lineGeo}>
-        <lineBasicMaterial color="#0969da" transparent opacity={0.1} />
+        <lineBasicMaterial color="#94a3b8" transparent opacity={0.3} />
       </lineSegments>
     </>
   );
@@ -190,8 +201,7 @@ const InteractiveBackground = ({ theme }) => {
     <div className="interactive-bg-container">
       <Canvas
         camera={{ position: [0, 0, 10], fov: 60 }}
-        style={{ background: bgColor }}
-        gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         dpr={[1, 1.5]} // Cap max pixel ratio for mobile performance
       >
         <PerformanceMonitor bounds={() => [30, 60]}>

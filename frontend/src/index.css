@@ -20,17 +20,16 @@
 }
 
 [data-theme='light'] {
-  --bg-main: #f6f8fa;
-  --bg-secondary: #ffffff;
-  --surface: #f3f4f6;
-  --primary: #0969da;
-  --secondary: #0550ae;
-  --accent: #1a7f37;
-  --text-main: #24292f;
-  --text-muted: #57606a;
-  --border: #d0d7de;
+  --bg-main: #f1f5f9; /* Light grayish */
+  --bg-secondary: #e2e8f0;
+  --text-main: #0f172a; /* High contrast slate */
+  --text-muted: #334155;
+  --primary: #0284c7; /* A bit darker blue for contrast */
+  --secondary: #0ea5e9;
+  --accent: #10b981;
+  --border: rgba(15, 23, 42, 0.15);
   --glass-bg: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.8);
 }
 
 * {
@@ -86,8 +85,14 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 20px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
 .section-padding {
-  padding: 6rem 0;
+  padding: 8rem 0; /* Massively increased for breathing room */
 }
 
 .section-title {

@@ -90,15 +90,7 @@ const Hero = () => {
                   )}
                   {line.type === 'output-special' && (
                     <p className="output type-effect">
-                      <Typewriter
-                        words={['Computer Engineering Student', 'Aspiring Data Scientist', 'Full-stack Developer', 'Tech Enthusiast']}
-                        loop={true}
-                        cursor
-                        cursorStyle="_"
-                        typeSpeed={70}
-                        deleteSpeed={50}
-                        delaySpeed={1000}
-                      />
+                      Computer Engineering Student
                     </p>
                   )}
                 </div>

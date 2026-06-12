@@ -181,25 +181,28 @@
 }
 
 .hero-cta .btn-secondary {
-  background: transparent;
+  background: var(--bg-secondary);
   color: var(--text-main);
-  border: 1.5px solid var(--border);
-  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
 }
 .hero-cta .btn-secondary:hover {
   transform: translateY(-3px);
   border-color: var(--primary);
-  background: rgba(88, 166, 255, 0.08);
+  background: var(--bg-main);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
 /* Scroll indicator */
 .scroll-indicator {
   position: absolute;
-  bottom: 28px;
+  bottom: 0px; /* Anchored nicely at the bottom */
   left: 50%;
   transform: translateX(-50%);
   color: var(--text-muted);
   opacity: 0.5;
+  padding-bottom: 2rem;
 }
 
 @media (max-width: 768px) {

@@ -1,40 +1,22 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send, FileText } from 'lucide-react';
 import './Contact.css';
 
-const ContactFlipCard = ({ icon, title, description, actionText, href }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  return (
-    <div 
-      className="contact-flip-card interactive"
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
-      onClick={() => setIsFlipped(!isFlipped)}
-    >
-      <motion.div 
-        className="contact-flip-inner"
-        animate={{ rotateX: isFlipped ? 180 : 0 }}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      >
-        <div className="contact-flip-front glass-panel">
-          <div className="contact-icon">{icon}</div>
-          <h3 className="contact-title">{title}</h3>
-        </div>
-        
-        <div className="contact-flip-back glass-panel">
-          <p className="contact-desc">{description}</p>
-          <a href={href} className="contact-action-btn glass-btn interactive">
-            {actionText}
-          </a>
-        </div>
-      </motion.div>
-    </div>
-  );
-};
-
 const Contact = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Normally handle form submission to backend here
+    setTimeout(() => {
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setSubmitted(false), 3000);
+    }, 1000);
+  };
+
   return (
     <section id="contact" className="contact section-padding relative-z">
       <div className="container">
@@ -54,53 +36,94 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          I'm always open to discussing product design work or partnership opportunities.
+          I'm always open to discussing product design work, internship roles, or partnership opportunities.
         </motion.p>
 
-        <div className="contact-grid">
+        <div className="contact-container">
           <motion.div 
+            className="contact-info glass-panel"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <ContactFlipCard 
-              icon={<Mail size={40} />}
-              title="Email Me"
-              description="Drop me a line anytime. I usually respond within 24 hours."
-              actionText="lakshit.singh25@pccoepune.org"
-              href="mailto:lakshit.singh25@pccoepune.org"
-            />
+            <h3>Get In Touch</h3>
+            <p className="contact-info-desc">
+              Looking for a dedicated software engineering intern or full-stack developer? I'm ready to learn, build, and contribute to your team.
+            </p>
+            
+            <div className="info-item">
+              <div className="info-icon"><Mail size={24} /></div>
+              <div>
+                <h4>Email</h4>
+                <p>lakshit.singh25@pccoepune.org</p>
+              </div>
+            </div>
+
+            <div className="info-item">
+              <div className="info-icon"><MapPin size={24} /></div>
+              <div>
+                <h4>Status</h4>
+                <p>Available for Internships</p>
+              </div>
+            </div>
+
+            <div className="resume-cta">
+              <a href="#" className="btn btn-primary interactive w-full flex-center" target="_blank" rel="noopener noreferrer">
+                <FileText size={20} className="mr-2" /> View Resume
+              </a>
+            </div>
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            <ContactFlipCard 
-              icon={<Send size={40} />}
-              title="Hire Me"
-              description="Looking for a full-stack developer? Let's build something amazing together."
-              actionText="View Resume"
-              href="#"
-            />
-          </motion.div>
-
-          <motion.div 
+            className="contact-form-wrapper glass-panel"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.4 }}
           >
-            <ContactFlipCard 
-              icon={<MapPin size={40} />}
-              title="Working Status"
-              description="Available for internships and roles."
-              actionText="Ready to learn and build"
-              href="#"
-            />
+            <form onSubmit={handleSubmit} className="contact-form">
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  required 
+                  className="form-control" 
+                  placeholder="John Doe"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  required 
+                  className="form-control" 
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="message">Message</label>
+                <textarea 
+                  id="message" 
+                  value={formData.message}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  required 
+                  className="form-control" 
+                  rows="5"
+                  placeholder="How can we work together?"
+                ></textarea>
+              </div>
+              
+              <button type="submit" className="btn btn-secondary interactive submit-btn">
+                {submitted ? 'Message Sent!' : <><Send size={18} className="mr-2" /> Send Message</>}
+              </button>
+            </form>
           </motion.div>
         </div>
       </div>
