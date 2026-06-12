@@ -1,22 +1,22 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Motivation3D from './components/Motivation3D';
-import DoodleArt from './components/DoodleArt';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
+import InteractiveBackground from './components/InteractiveBackground';
 
 function App() {
   return (
     <div className="App">
+      <CustomCursor />
+      <InteractiveBackground />
       <Navbar />
       <main>
         <Hero />
-        <Motivation3D />
-        <DoodleArt />
         <About />
         <Skills />
         <Projects />
