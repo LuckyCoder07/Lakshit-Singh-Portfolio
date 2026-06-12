@@ -11,7 +11,7 @@ const Navbar = ({ theme, toggleTheme }) => {
       setScrolled(window.scrollY > 50);
 
       // Scroll Spy
-      const sections = ['hero', 'about', 'skills', 'projects', 'contact'];
+      const sections = ['hero', 'about', 'experience', 'skills', 'projects', 'contact'];
       let current = 'hero';
 
       for (const section of sections) {
@@ -36,6 +36,7 @@ const Navbar = ({ theme, toggleTheme }) => {
         <nav>
           <ul className="nav-links">
             <li><a href="#about" className={activeSection === 'about' ? 'active-link' : ''}>About</a></li>
+            <li><a href="#experience" className={activeSection === 'experience' ? 'active-link' : ''}>Experience</a></li>
             <li><a href="#skills" className={activeSection === 'skills' ? 'active-link' : ''}>Skills</a></li>
             <li><a href="#projects" className={activeSection === 'projects' ? 'active-link' : ''}>Projects</a></li>
             <li><a href="#contact" className={activeSection === 'contact' ? 'active-link' : ''}>Contact</a></li>
