@@ -1,6 +1,5 @@
-import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
-import profilePic from '../assets/profile.jpg';
+import profilePic from '../assets/profile.png';
 import './Hero.css';
 
 const Hero = () => {
