@@ -1,33 +1,34 @@
-.cursor-ring {
+.cursor-main {
   position: fixed;
   top: 0;
   left: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: exclusion;
-}
-
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background-color: var(--primary);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: exclusion;
+  transform: translate(9px, 9px); /* Center 6px dot inside 24px follower (24-6)/2 = 9 */
 }
 
-/* Hide default cursor globally */
-body {
-  cursor: none !important;
+.cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  backdrop-filter: blur(2px);
+  /* The glow */
+  box-shadow: 0 0 15px rgba(88, 166, 255, 0.2);
 }
 
-a, button, input, select, textarea, .interactive {
-  cursor: none !important;
+/* Hide default cursor on desktop when using custom cursor */
+@media (min-width: 768px) {
+  body, a, button, .interactive {
+    cursor: none !important;
+  }
 }

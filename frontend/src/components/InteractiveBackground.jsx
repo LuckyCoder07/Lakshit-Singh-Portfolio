@@ -195,10 +195,10 @@ const GlassDataFlow = () => {
 // --------------------------------------------------------
 const InteractiveBackground = ({ theme }) => {
   const isDark = theme !== 'light';
-  const bgColor = isDark ? '#0d1117' : '#f6f8fa';
+  const bgColor = isDark ? '#0d1117' : 'transparent';
 
   return (
-    <div className="interactive-bg-container">
+    <div className="interactive-bg-container" style={{ background: bgColor }}>
       <Canvas
         camera={{ position: [0, 0, 10], fov: 60 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
