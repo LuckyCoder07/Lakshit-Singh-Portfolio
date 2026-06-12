@@ -1,20 +1,82 @@
+.skills-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.5rem 1.5rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+}
+
+.tab-btn:hover {
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--text-main);
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 0 15px rgba(79, 70, 229, 0.4);
+}
+
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 2rem;
 }
 
-.skill-card {
-  padding: 2rem;
+.tech-stack-card {
+  padding: 2.5rem 1.5rem;
   text-align: center;
   transition: var(--transition);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.skill-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent);
-  box-shadow: 0 10px 30px -15px var(--accent);
+.tech-stack-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.tech-stack-card:hover::before {
+  transform: scaleX(1);
+}
+
+.tech-stack-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--border);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.skill-icon {
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.tech-stack-card:hover .skill-icon {
+  transform: scale(1.2) rotate(5deg);
 }
 
 .skill-name {
@@ -25,10 +87,17 @@
 }
 
 .skill-category {
-  font-size: 0.9rem;
-  color: var(--accent);
+  font-size: 0.8rem;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+}
+
+.icon-placeholder {
+  width: 40px;
+  height: 40px;
+  background: var(--border);
+  border-radius: 50%;
 }
 
 .loading {

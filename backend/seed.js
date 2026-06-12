@@ -12,13 +12,13 @@ const projects = [
     title: 'VisionMorp AI',
     description: 'An AI-powered application designed to transform and morph images using advanced machine learning models.',
     techStack: ['Python', 'React', 'Node.js'],
-    githubLink: 'https://github.com/LuckyCoder07',
+    githubLink: 'https://github.com/LuckyCoder07/VisonMorphAI',
   },
   {
     title: 'QuicknotesAI',
     description: 'A smart note-taking app that automatically summarizes and organizes your notes using AI.',
     techStack: ['React', 'Firebase', 'Tailwind CSS'],
-    githubLink: 'https://github.com/LuckyCoder07',
+    githubLink: 'https://github.com/LuckyCoder07/QuickNotes-AI',
   },
   {
     title: 'GravityFlipper Game',
@@ -30,7 +30,7 @@ const projects = [
     title: 'Vouch-digital Code Notary',
     description: 'A secure platform for digital code signing and verification to ensure software integrity.',
     techStack: ['Node.js', 'React', 'MongoDB'],
-    githubLink: 'https://github.com/LuckyCoder07',
+    githubLink: 'https://github.com/LuckyCoder07/Vouch-Project',
   }
 ];
 

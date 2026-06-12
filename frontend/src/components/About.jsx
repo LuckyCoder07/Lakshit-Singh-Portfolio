@@ -21,7 +21,7 @@ const About = () => {
           </div>
           <div className="about-image-container">
             <div className="about-image-wrapper">
-              <div className="about-image-placeholder">LS</div>
+              <img src="https://github.com/LuckyCoder07.png" alt="Lakshit Singh" className="profile-img" />
             </div>
           </div>
         </div>

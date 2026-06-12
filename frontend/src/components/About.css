@@ -33,7 +33,7 @@
   position: relative;
   width: 300px;
   height: 300px;
-  border-radius: 1rem;
+  border-radius: 50%;
   background-color: var(--surface);
   display: flex;
   align-items: center;
@@ -45,14 +45,21 @@
 .about-image-wrapper::after {
   content: '';
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 15px;
+  left: 15px;
   width: 100%;
   height: 100%;
   border: 2px solid var(--accent);
-  border-radius: 1rem;
+  border-radius: 50%;
   z-index: -1;
   transition: var(--transition);
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .about-image-container:hover .about-image-wrapper {
