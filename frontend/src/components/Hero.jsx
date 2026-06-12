@@ -64,14 +64,14 @@ const Hero = () => {
             </motion.p>
             
             <motion.div 
-              className="hero-cta"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-            >
-              <a href="#projects" className="btn btn-primary glass-btn">View My Work</a>
-              <a href="#contact" className="btn btn-secondary glass-btn">Get In Touch</a>
-            </motion.div>
+          className="hero-cta"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+        >
+          <a href="#projects" className="btn btn-primary interactive">View My Projects</a>
+          <a href="#contact" className="btn btn-secondary interactive glass-btn">Get In Touch</a>
+        </motion.div>
           </div>
         </motion.div>
 

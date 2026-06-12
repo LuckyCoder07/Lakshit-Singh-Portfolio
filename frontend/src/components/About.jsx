@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Tilt from 'react-parallax-tilt';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import './About.css';
 
@@ -92,13 +93,17 @@ const About = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.4 }}
           >
-            <motion.div 
-              className="about-image-wrapper glass-panel interactive"
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            <Tilt 
+              className="about-image-wrapper glass-panel interactive parallax-effect" 
+              perspective={500} 
+              glareEnable={true} 
+              glareMaxOpacity={0.45} 
+              scale={1.05}
+              transitionSpeed={2500}
             >
               <img src={profilePic} alt="Lakshit Singh" className="profile-img" />
-            </motion.div>
+              <div className="inner-element"></div>
+            </Tilt>
           </motion.div>
         </div>
       </div>

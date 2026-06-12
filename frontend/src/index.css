@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
+  /* Default Dark Theme */
   --bg-main: #0d1117;
   --bg-secondary: #161b22;
   --surface: #21262d;
@@ -10,9 +11,26 @@
   --text-main: #c9d1d9;
   --text-muted: #8b949e;
   --border: #30363d;
+  --glass-bg: rgba(22, 27, 34, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --font-sans: 'Inter', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'Fira Code', monospace;
+}
+
+[data-theme='light'] {
+  --bg-main: #f6f8fa;
+  --bg-secondary: #ffffff;
+  --surface: #f3f4f6;
+  --primary: #0969da;
+  --secondary: #0550ae;
+  --accent: #1a7f37;
+  --text-main: #24292f;
+  --text-muted: #57606a;
+  --border: #d0d7de;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -27,10 +45,17 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg-main);
+  background-color: transparent;
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  transition: color 0.3s ease;
+}
+
+#root, .App {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
 }
 
 .mono-text {
@@ -50,6 +75,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   font-weight: 700;
   color: var(--text-main);
+  letter-spacing: -0.02em;
 }
 
 /* Utilities */
@@ -78,12 +104,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Liquid Glass Panels */
 .glass-panel {
-  background: rgba(22, 27, 34, 0.4);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
   border-radius: 16px;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .glass-btn {
@@ -122,46 +149,53 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  cursor: none;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  letter-spacing: -0.01em;
+}
+
 .btn-primary {
-  display: inline-block;
   background-color: var(--primary);
   color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition: var(--transition);
+  padding: 0.8rem 1.8rem;
+  border-radius: 10px;
   border: none;
-  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(88,166,255,0.3);
 }
-
 .btn-primary:hover {
-  background-color: var(--primary-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(88,166,255,0.45);
 }
 
-.btn-outline {
-  display: inline-block;
-  background-color: transparent;
-  color: var(--accent);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  border: 2px solid var(--accent);
-  transition: var(--transition);
-  cursor: pointer;
+.btn-secondary {
+  background: transparent;
+  color: var(--text-main);
+  padding: 0.8rem 1.8rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
 }
-
-.btn-outline:hover {
-  background-color: rgba(56, 189, 248, 0.1);
-  transform: translateY(-2px);
+.btn-secondary:hover {
+  border-color: var(--primary);
+  background: rgba(88,166,255,0.08);
+  transform: translateY(-3px);
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   margin-bottom: 3rem;
   text-align: center;
-  background: linear-gradient(135deg, var(--text-main), var(--accent));
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--text-main) 30%, var(--primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
