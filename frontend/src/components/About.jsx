@@ -92,9 +92,13 @@ const About = () => {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.4 }}
           >
-            <div className="about-image-wrapper glass-panel">
+            <motion.div 
+              className="about-image-wrapper glass-panel interactive"
+              whileHover={{ scale: 1.05, rotate: 2 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
               <img src={profilePic} alt="Lakshit Singh" className="profile-img" />
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

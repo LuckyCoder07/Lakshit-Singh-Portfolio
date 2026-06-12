@@ -1,22 +1,18 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Points, PointMaterial } from '@react-three/drei';
-import * as random from 'maath/random/dist/maath-random.esm';
+import { Sphere, MeshDistortMaterial, Environment } from '@react-three/drei';
 import './InteractiveBackground.css';
 
-const ParticleSwarm = (props) => {
+const LiquidBlob = () => {
   const ref = useRef();
   const { mouse } = useThree();
-  
-  // Generate 5000 random points in a sphere
-  const sphere = useMemo(() => random.inSphere(new Float32Array(5000), { radius: 10 }), []);
 
   useFrame((state, delta) => {
     // Base rotation
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    ref.current.rotation.x += delta * 0.1;
+    ref.current.rotation.y += delta * 0.15;
     
-    // Mouse tracking rotation (inverse for parallax feel)
+    // Mouse tracking rotation (follows cursor)
     const targetX = (mouse.x * Math.PI) / 4;
     const targetY = (mouse.y * Math.PI) / 4;
     
@@ -25,25 +21,29 @@ const ParticleSwarm = (props) => {
   });
 
   return (
-    <group rotation={[0, 0, Math.PI / 4]}>
-      <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
-        <PointMaterial 
-          transparent 
-          color="#58a6ff" 
-          size={0.05} 
-          sizeAttenuation={true} 
-          depthWrite={false} 
-        />
-      </Points>
-    </group>
+    <Sphere ref={ref} args={[1, 100, 100]} scale={3.5}>
+      <MeshDistortMaterial 
+        color="#2c3e50" 
+        attach="material" 
+        distort={0.4} 
+        speed={2} 
+        roughness={0.1} 
+        metalness={1} 
+        envMapIntensity={1}
+      />
+    </Sphere>
   );
 };
 
 const InteractiveBackground = () => {
   return (
     <div className="interactive-bg-container">
-      <Canvas camera={{ position: [0, 0, 15] }}>
-        <ParticleSwarm />
+      <Canvas camera={{ position: [0, 0, 8] }}>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#58a6ff" />
+        <Environment preset="city" />
+        <LiquidBlob />
       </Canvas>
       <div className="global-blur-overlay"></div>
     </div>

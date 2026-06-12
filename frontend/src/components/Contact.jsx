@@ -68,8 +68,8 @@ const Contact = () => {
               icon={<Mail size={40} />}
               title="Email Me"
               description="Drop me a line anytime. I usually respond within 24 hours."
-              actionText="lakshitsingh@example.com"
-              href="mailto:lakshitsingh@example.com"
+              actionText="lakshit.singh25@pccoepune.org"
+              href="mailto:lakshit.singh25@pccoepune.org"
             />
           </motion.div>
 
@@ -96,10 +96,10 @@ const Contact = () => {
           >
             <ContactFlipCard 
               icon={<MapPin size={40} />}
-              title="Location"
-              description="Pune, Maharashtra, India. Open to remote opportunities worldwide."
-              actionText="View on Map"
-              href="https://maps.google.com/?q=Pune"
+              title="Working Status"
+              description="Available for internships and roles."
+              actionText="Ready to learn and build"
+              href="#"
             />
           </motion.div>
         </div>
