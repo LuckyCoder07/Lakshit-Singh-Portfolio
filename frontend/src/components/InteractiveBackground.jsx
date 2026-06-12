@@ -71,7 +71,7 @@ const FloatingOrbs = () => {
       pos: [
         (Math.random() - 0.5) * 20,
         (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 8,
+        (Math.random() - 0.5) * 8 - 4, // Pushed back
       ],
       speed: 0.2 + Math.random() * 0.4,
       offset: Math.random() * Math.PI * 2,
@@ -113,7 +113,7 @@ const GlassDataFlow = () => {
       pos: new THREE.Vector3(
         (Math.random() - 0.5) * 15,
         (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 8 - 2
+        (Math.random() - 0.5) * 8 - 6 // Pushed back
       ),
       speed: Math.random() * 0.2 + 0.1,
       offset: Math.random() * Math.PI * 2,
