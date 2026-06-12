@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Brain, FileText, Gamepad2, ShieldCheck, ArrowRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import './Projects.css';
 
@@ -13,28 +13,45 @@ const Projects = () => {
     {
       title: 'VisionMorp AI',
       description: 'An AI-powered application designed to transform and morph images using advanced machine learning models.',
-      techStack: ['Python', 'React', 'Node.js'],
+      techStack: ['Python', 'PyTorch', 'React', 'OpenCV'],
       githubLink: 'https://github.com/LuckyCoder07/VisonMorphAI',
+      icon: 'brain',
+      caseStudyLink: '#'
     },
     {
       title: 'QuicknotesAI',
       description: 'A smart note-taking app that automatically summarizes and organizes your notes using AI.',
-      techStack: ['React', 'Firebase', 'Tailwind CSS'],
+      techStack: ['React', 'Firebase', 'Hugging Face'],
       githubLink: 'https://github.com/LuckyCoder07/QuickNotes-AI',
+      liveLink: '#',
+      icon: 'file'
     },
     {
       title: 'GravityFlipper Game',
       description: 'An engaging web-based physics game where players manipulate gravity to overcome obstacles.',
       techStack: ['React', 'Node.js', 'C++'],
       githubLink: 'https://github.com/LuckyCoder07',
+      liveLink: '#',
+      icon: 'game'
     },
     {
       title: 'Vouch-digital Code Notary',
       description: 'A secure platform for digital code signing and verification to ensure software integrity.',
       techStack: ['Node.js', 'React', 'MongoDB'],
       githubLink: 'https://github.com/LuckyCoder07/Vouch-Project',
+      icon: 'shield'
     }
   ];
+
+  const renderIcon = (type) => {
+    switch(type) {
+      case 'brain': return <Brain className="project-icon" />;
+      case 'file': return <FileText className="project-icon" />;
+      case 'game': return <Gamepad2 className="project-icon" />;
+      case 'shield': return <ShieldCheck className="project-icon" />;
+      default: return null;
+    }
+  };
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -85,7 +102,10 @@ const Projects = () => {
                 whileHover={{ y: -10, scale: 1.02 }}
               >
                 <div className="project-content">
-                  <h3 className="project-title">{project.title}</h3>
+                  <div className="project-header">
+                    {renderIcon(project.icon)}
+                    <h3 className="project-title">{project.title}</h3>
+                  </div>
                   <p className="project-description">{project.description}</p>
                   
                   <div className="project-tech-list">
@@ -98,12 +118,17 @@ const Projects = () => {
                 <div className="project-links mt-4">
                   {project.githubLink && (
                     <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="btn btn-secondary glass-btn interactive view-code-btn">
-                      <FaGithub size={18} /> View Code
+                      <FaGithub size={18} /> Code
                     </a>
                   )}
                   {project.liveLink && (
-                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" aria-label="Live Link">
-                      <ExternalLink size={20} />
+                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary interactive">
+                      <ExternalLink size={18} /> Live Demo
+                    </a>
+                  )}
+                  {project.caseStudyLink && (
+                    <a href={project.caseStudyLink} className="btn btn-secondary glass-btn interactive">
+                      Case Study <ArrowRight size={18} />
                     </a>
                   )}
                 </div>

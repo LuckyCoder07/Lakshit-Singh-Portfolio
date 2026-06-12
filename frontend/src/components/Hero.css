@@ -72,10 +72,39 @@
   padding: 20px;
   color: var(--text-main);
   text-align: left;
+  max-height: 250px;
+  overflow-y: auto;
+  cursor: text;
+}
+
+/* Hide scrollbar for a cleaner terminal look */
+.terminal-body::-webkit-scrollbar {
+  width: 6px;
+}
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
 }
 
 .command {
   margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.terminal-input-line {
+  margin-top: 5px;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+  outline: none;
+  flex: 1;
+  caret-color: var(--accent);
 }
 
 .prompt {
@@ -111,12 +140,13 @@
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
   color: var(--text-muted);
   max-width: 580px;
   margin: 0 auto 0;
   line-height: 1.7;
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 /* CTA Buttons — well spaced */

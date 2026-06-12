@@ -1,10 +1,64 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import './Hero.css';
 
 const Hero = () => {
+  const [history, setHistory] = useState([
+    { type: 'command', text: 'whoami' },
+    { type: 'output', text: 'Lakshit Singh' },
+    { type: 'command', text: 'cat role.txt' },
+    { type: 'output-special', text: 'typewriter' }
+  ]);
+  const [input, setInput] = useState('');
+  const bottomRef = useRef(null);
+
+  // Auto-scroll terminal
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [history]);
+
+  const handleCommand = (e) => {
+    if (e.key === 'Enter' && input.trim()) {
+      const cmd = input.trim().toLowerCase();
+      let response = '';
+
+      switch (cmd) {
+        case 'help':
+          response = 'Available commands: whoami, skills, clear, repo, sudo';
+          break;
+        case 'whoami':
+          response = 'Lakshit Singh - Computer Engineering Student & Developer';
+          break;
+        case 'skills':
+          response = 'React, Node.js, Python, C++, Firebase, Tailwind CSS... Check the Skills section for more!';
+          break;
+        case 'clear':
+          setHistory([]);
+          setInput('');
+          return;
+        case 'repo':
+          response = 'Accessing GitHub... Check my projects section for repository links.';
+          break;
+        case 'sudo':
+          response = 'Nice try. This incident will be reported. 🚨';
+          break;
+        default:
+          response = `Command not found: ${cmd}. Type 'help' for available commands.`;
+      }
+
+      setHistory(prev => [
+        ...prev, 
+        { type: 'command', text: input },
+        { type: 'output', text: response }
+      ]);
+      setInput('');
+    }
+  };
+
   return (
     <section id="hero" className="hero glass-panel-hero">
       <div className="container hero-container">
@@ -22,26 +76,49 @@ const Hero = () => {
               <span className="dot green"></span>
               <span className="terminal-title">guest@lakshit: ~</span>
             </div>
-            <div className="terminal-body mono-text">
-              <p className="command">
-                <span className="prompt">$</span> whoami
-              </p>
-              <p className="output">Lakshit Singh</p>
+            
+            <div className="terminal-body mono-text" onClick={() => document.getElementById('terminal-input').focus()}>
+              {history.map((line, i) => (
+                <div key={i}>
+                  {line.type === 'command' && (
+                    <p className="command">
+                      <span className="prompt">$</span> {line.text}
+                    </p>
+                  )}
+                  {line.type === 'output' && (
+                    <p className="output">{line.text}</p>
+                  )}
+                  {line.type === 'output-special' && (
+                    <p className="output type-effect">
+                      <Typewriter
+                        words={['Computer Engineering Student', 'Aspiring Data Scientist', 'Full-stack Developer', 'Tech Enthusiast']}
+                        loop={true}
+                        cursor
+                        cursorStyle="_"
+                        typeSpeed={70}
+                        deleteSpeed={50}
+                        delaySpeed={1000}
+                      />
+                    </p>
+                  )}
+                </div>
+              ))}
               
-              <p className="command mt-2">
-                <span className="prompt">$</span> cat role.txt
-              </p>
-              <p className="output type-effect">
-                <Typewriter
-                  words={['Computer Engineering Student', 'Aspiring Data Scientist', 'Full-stack Developer', 'Tech Enthusiast']}
-                  loop={true}
-                  cursor
-                  cursorStyle="_"
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={1000}
+              <div className="terminal-input-line command">
+                <span className="prompt">$</span>
+                <input
+                  id="terminal-input"
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleCommand}
+                  className="terminal-input"
+                  autoComplete="off"
+                  spellCheck="false"
+                  autoFocus
                 />
-              </p>
+              </div>
+              <div ref={bottomRef} />
             </div>
           </div>
 
@@ -64,14 +141,14 @@ const Hero = () => {
             </motion.p>
             
             <motion.div 
-          className="hero-cta"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-        >
-          <a href="#projects" className="btn btn-primary interactive">View My Projects</a>
-          <a href="#contact" className="btn btn-secondary interactive glass-btn">Get In Touch</a>
-        </motion.div>
+              className="hero-cta"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
+              <a href="#projects" className="btn btn-primary interactive">View My Projects</a>
+              <a href="#contact" className="btn btn-secondary interactive glass-btn">Get In Touch</a>
+            </motion.div>
           </div>
         </motion.div>
 
@@ -80,9 +157,9 @@ const Hero = () => {
       <motion.div 
         className="scroll-indicator"
         animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 1.5 }}
+        transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
       >
-        <ArrowDown size={24} />
+        <ArrowDown size={28} />
       </motion.div>
     </section>
   );

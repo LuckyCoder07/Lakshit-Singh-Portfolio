@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaReact, FaNodeJs, FaPython, FaFire } from 'react-icons/fa';
 import { SiTailwindcss, SiCplusplus, SiC, SiMongodb } from 'react-icons/si';
 import './Skills.css';
@@ -65,7 +65,8 @@ const Skills = () => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.9 },
-    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 200 } }
+    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 200 } },
+    exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } }
   };
 
   return (
@@ -108,19 +109,25 @@ const Skills = () => {
               whileInView="show"
               viewport={{ once: true, margin: "-50px" }}
             >
-              {filteredSkills.map((skill, index) => (
-                <motion.div 
-                  key={index} 
-                  variants={itemVariants}
-                  className="skill-card glass-panel tech-stack-card"
-                >
-                  <div className="skill-icon">
-                    {iconMap[skill.name] || <div className="icon-placeholder" />}
-                  </div>
-                  <div className="skill-name">{skill.name}</div>
-                  <div className="skill-category">{skill.category}</div>
-                </motion.div>
-              ))}
+              <AnimatePresence mode="popLayout">
+                {filteredSkills.map((skill, index) => (
+                  <motion.div 
+                    key={skill.name} 
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate="show"
+                    exit="exit"
+                    layout
+                    className="skill-card glass-panel tech-stack-card"
+                  >
+                    <div className="skill-icon">
+                      {iconMap[skill.name] || <div className="icon-placeholder" />}
+                    </div>
+                    <div className="skill-name">{skill.name}</div>
+                    <div className="skill-category">{skill.category}</div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </motion.div>
           </>
         )}

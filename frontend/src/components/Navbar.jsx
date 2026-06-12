@@ -26,10 +26,12 @@ const Navbar = ({ theme, toggleTheme }) => {
             <li>
               <button 
                 onClick={toggleTheme} 
-                className="theme-toggle-btn interactive"
+                className={`neon-switch-container interactive ${theme === 'light' ? 'is-light' : 'is-dark'}`}
                 aria-label="Toggle theme"
               >
-                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                <div className="neon-switch-track">
+                  <div className="neon-switch-thumb"></div>
+                </div>
               </button>
             </li>
           </ul>
