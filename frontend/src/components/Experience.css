@@ -135,5 +135,6 @@
   
   .timeline-content {
     width: calc(100% - 50px);
+    padding: 1.5rem;
   }
 }

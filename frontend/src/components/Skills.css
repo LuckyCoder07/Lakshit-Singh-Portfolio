@@ -81,4 +81,7 @@
   .skills-columns {
     grid-template-columns: 1fr;
   }
+  .skills-column {
+    padding: 1.5rem;
+  }
 }

@@ -197,4 +197,16 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-3px);
 }
 
+/* Mobile Responsiveness for globals */
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 6rem 0; /* Reduce massive padding on mobile */
+  }
+  
+  .section-title {
+    margin-bottom: 2.5rem;
+    font-size: clamp(1.8rem, 8vw, 2.2rem);
+  }
+}
+
 

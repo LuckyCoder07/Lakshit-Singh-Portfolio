@@ -215,4 +215,19 @@
     width: 100%;
     max-width: 280px;
   }
+  .terminal-body {
+    padding: 15px;
+    font-size: 0.85rem;
+    word-break: break-word;
+  }
+  .terminal-input {
+    font-size: 0.85rem;
+    width: 100%;
+  }
+  .command {
+    flex-wrap: wrap;
+  }
+  .prompt {
+    margin-right: 5px;
+  }
 }

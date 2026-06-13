@@ -129,4 +129,8 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .contact-info,
+  .contact-form-wrapper {
+    padding: 1.5rem;
+  }
 }

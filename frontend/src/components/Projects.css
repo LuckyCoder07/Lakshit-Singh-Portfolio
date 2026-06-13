@@ -89,3 +89,12 @@
   color: var(--primary);
   flex-shrink: 0;
 }
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-card {
+    padding: 1.5rem;
+  }
+}

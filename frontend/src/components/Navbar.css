@@ -115,8 +115,49 @@
   box-shadow: 0 0 10px #0969da, 0 0 20px #0969da;
 }
 
+.mobile-menu-icon {
+  display: none;
+  cursor: pointer;
+  color: var(--text-main);
+  z-index: 1001;
+}
+
 @media (max-width: 768px) {
+  .mobile-menu-icon {
+    display: block;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 100vh;
+    background: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    transition: 0.3s ease-in-out;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+  
+  .nav-menu.active {
+    right: 0;
+  }
+  
   .nav-links {
-    display: none; /* In a real app, implement a hamburger menu */
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 2rem;
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+  }
+  
+  .theme-toggle-li {
+    margin-top: 1rem;
   }
 }
